@@ -33,9 +33,10 @@
  */
 package fr.paris.lutece.plugins.crmclient.business;
 
-import fr.paris.lutece.portal.service.util.AppPropertiesService;
+import org.apache.commons.lang3.StringUtils;
 
-import org.apache.commons.lang.StringUtils;
+import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.ConfigProvider;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -49,6 +50,7 @@ public abstract class CRMItem implements ICRMItem
 {
     private static final long serialVersionUID = 4324796594271864562L;
     private static final String PROPERTY_WS_CRM_REST_WEBAPP_URL = "crmclient.crm.rest.webapp.url";
+    private static final Config _config = ConfigProvider.getConfig( );
 
     // Private parameters
     private Map<String, String> _mapParameters = new LinkedHashMap<String, String>( );
@@ -121,6 +123,6 @@ public abstract class CRMItem implements ICRMItem
             strPropertyWebAppUrl.append( getCRMWebAppCode( ) );
         }
 
-        return AppPropertiesService.getProperty( strPropertyWebAppUrl.toString( ) );
+        return _config.getOptionalValue( strPropertyWebAppUrl.toString( ), String.class ).orElse( null );
     }
 }

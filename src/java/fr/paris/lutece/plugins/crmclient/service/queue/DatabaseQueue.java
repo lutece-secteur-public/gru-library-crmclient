@@ -37,13 +37,17 @@ import fr.paris.lutece.plugins.crmclient.business.CRMItemQueue;
 import fr.paris.lutece.plugins.crmclient.business.ICRMItem;
 import fr.paris.lutece.plugins.crmclient.business.ICRMItemQueueDAO;
 
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  *
  * DatabaseQueue
  *
  */
+@ApplicationScoped
+@Named( ICRMClientQueue.BEAN_SERVICE )
 public class DatabaseQueue implements ICRMClientQueue
 {
     @Inject
